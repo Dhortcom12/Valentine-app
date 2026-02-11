@@ -2,69 +2,303 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine Link Generator 💌</title>
+<title>For You 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:'Montserrat',sans-serif;
-  display:flex; justify-content:center; align-items:center;
-  min-height:100vh; background:linear-gradient(135deg,#ff5fa2,#ff2f6d);
-  color:#fff; padding:20px;
+  height:100vh;
+  background:
+    linear-gradient(rgba(255,95,158,0.7),rgba(255,134,179,0.7)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+  font-family:'Montserrat', sans-serif;
+  transition: all 1s ease;
 }
+
+body.glow{
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 30px rgba(255,47,109,0.3) inset;}
+  50%{box-shadow:0 0 60px rgba(255,47,109,0.6) inset;}
+  100%{box-shadow:0 0 80px rgba(255,47,109,0.4) inset;}
+}
+
 .container{
-  background:rgba(255,255,255,0.1); backdrop-filter:blur(10px);
-  padding:30px; border-radius:25px; width:100%; max-width:450px;
+  background:rgba(255,255,255,0.15);
+  padding:40px;
+  border-radius:30px;
   text-align:center;
+  width:90%;
+  max-width:450px;
+  backdrop-filter:blur(10px);
+  box-shadow: 0 8px 30px rgba(255,255,255,0.2);
+  position:relative;
+  animation:fadeIn 1s ease;
 }
-input, button{
-  width:100%; padding:12px; margin:6px 0; border-radius:20px; border:none; font-size:1rem;
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.95);}
+  to{opacity:1; transform:scale(1);}
 }
+
+h1{
+  font-family:'Great Vibes', cursive;
+  font-size:3rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+p{
+  margin:20px 0 30px;
+  font-size:1.2rem;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
 button{
-  background:linear-gradient(135deg,#ff2f6d,#ff5fa2); color:#fff; cursor:pointer; font-weight:600;
-  box-shadow:0 6px 15px rgba(255,95,158,0.5);
+  padding:14px 35px;
+  border:none;
+  border-radius:30px;
+  font-size:1.1rem;
+  cursor:pointer;
+  font-family:'Montserrat', sans-serif;
+  position:relative;
+  transition: all 0.3s ease;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
 }
-button:hover{transform:scale(1.05);}
-#generatedLink{
-  margin-top:10px; word-break:break-word; font-size:0.9rem; color:#fff;
-  background:rgba(255,255,255,0.1); padding:10px; border-radius:15px;
+
+#yesBtn{
+  background:linear-gradient(135deg,#ff2f6d,#ff5fa2);
+  color:#fff;
+}
+
+#yesBtn:hover{
+  transform:scale(1.1) rotate(-2deg);
+  box-shadow:0 10px 25px rgba(255,95,158,0.5);
+}
+
+#noBtn{
+  background:#fff;
+  color:#ff2f6d;
+}
+
+#noBtn:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 20px rgba(255,95,158,0.3);
+}
+
+.message{
+  display:none;
+  margin-top:25px;
+  font-family:'Great Vibes', cursive;
+  font-size:1.6rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  animation:pop 0.6s ease forwards;
+}
+
+@keyframes pop{
+  from{transform:scale(0.6); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+.signature{
+  margin-top:25px;
+  font-size:1rem;
+}
+
+.copyright{
+  margin-top:30px;
+  font-size:0.9rem;
+  color:rgba(255,255,255,0.7);
+  font-family:'Montserrat', sans-serif;
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+
+/* EFFECTS */
+.effects{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
+}
+
+.symbol,.balloon,.footerHeart{
+  position:absolute;
+  animation:floatUp 6s linear forwards;
+}
+
+.footerHeart{
+  color:rgba(255,255,255,0.3);
+  font-size:14px;
+  bottom:0;
+  opacity:0.5;
+  z-index:0;
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  color:#fff;
+  opacity:0.8;
+  font-size:8px;
+  pointer-events:none;
+  animation:sparkleUp 0.8s linear forwards;
+}
+
+@keyframes sparkleUp{
+  0%{transform:translateY(0) scale(0.5);opacity:1;}
+  100%{transform:translateY(-50px) scale(1.2);opacity:0;}
+}
+
+@keyframes floatUp{
+  from{transform:translateY(100vh) scale(0.5);opacity:0;}
+  20%{opacity:1;}
+  to{transform:translateY(-120vh) scale(1.5);opacity:0;}
+}
+
+@keyframes balloonUp{
+  from{transform:translateY(100vh) scale(0.8);}
+  to{transform:translateY(-120vh) scale(1.2);}
 }
 </style>
 </head>
+
 <body>
+
+<audio id="bgMusic" loop></audio>
+
 <div class="container">
-  <h2>💌 Create Your Valentine Link</h2>
-  <form id="linkForm">
-    <input type="text" id="toInput" placeholder="To (Recipient Name)" required>
-    <input type="text" id="fromInput" placeholder="From (Your Name)" required>
-    <input type="text" id="msgInput" placeholder="Custom message (optional)">
-    <input type="url" id="songInput" placeholder="Song URL (optional)">
-    <input type="tel" id="waInput" placeholder="Your WhatsApp number (optional)">
-    <button type="submit">Generate Link 💖</button>
-  </form>
-  <div id="generatedLink"></div>
+  <h1 id="toName">My Love 💖</h1>
+  <p>Will you be my Valentine? 🌹✨</p>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
+
+  <div class="message" id="loveMessage">
+    <h2>Yaaay Abby!!! 😍❤️</h2>
+    <p>
+      You just made my heart explode 🥹💕<br>
+      Thank you for being my Valentine 🌹<br>
+      I can’t wait to love you more every day ❤️
+    </p>
+  </div>
+
+  <div class="signature" id="fromName">💌 From: Someone Special ❤️</div>
+
+  <!-- COPYRIGHT FOOTER -->
+  <div class="copyright">© 2026 Elorm ❤️ All Rights Reserved</div>
 </div>
 
+<div class="effects" id="effects"></div>
+
 <script>
-const form=document.getElementById('linkForm');
-const output=document.getElementById('generatedLink');
+// READ LINK PARAMETERS
+const params = new URLSearchParams(window.location.search);
+const to = params.get("to") || "My Love";
+const from = params.get("from") || "Someone Special";
+const msg = params.get("msg");
+const song = params.get("song");
+const wa = params.get("wa");
 
-form.addEventListener('submit',(e)=>{
+document.getElementById("toName").innerText = to + " 💖";
+document.getElementById("fromName").innerText = "💌 From: " + from + " ❤️";
+if(msg) document.getElementById("loveMessage").innerHTML += `<p>${msg}</p>`;
+if(song) document.getElementById("bgMusic").src = song;
+
+// BUTTONS
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const messageBox = document.getElementById("loveMessage");
+const music = document.getElementById("bgMusic");
+const body = document.body;
+const effects = document.getElementById("effects");
+
+noBtn.addEventListener("mouseenter", dodge);
+noBtn.addEventListener("touchstart", dodge);
+function dodge(e){
   e.preventDefault();
-  const t=encodeURIComponent(document.getElementById('toInput').value);
-  const f=encodeURIComponent(document.getElementById('fromInput').value);
-  const m=encodeURIComponent(document.getElementById('msgInput').value);
-  const s=encodeURIComponent(document.getElementById('songInput').value);
-  const w=encodeURIComponent(document.getElementById('waInput').value);
+  noBtn.style.transform = `translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
+}
 
-  let link = window.location.origin + '/valentine.html' + `?to=${t}&from=${f}`;
-  if(m) link += `&msg=${m}`;
-  if(s) link += `&song=${s}`;
-  if(w) link += `&wa=${w}`;
-
-  output.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+// YES BUTTON WITH WHATSAPP AUTO
+yesBtn.addEventListener("click", ()=>{
+  messageBox.style.display="block";
+  body.classList.add("glow");
+  music.play();
+  if(wa){
+    const reply = `Hey ${from} 😍 I said YES to your Valentine 💖`;
+    const whatsappLink = `https://wa.me/${wa}?text=${encodeURIComponent(reply)}`;
+    setTimeout(()=>window.open(whatsappLink,"_blank"),1000);
+  }
 });
+
+// FLOATING HEARTS & BALLOONS
+function createSymbol(){
+  const el=document.createElement("div");
+  el.className="symbol";
+  el.innerHTML=Math.random()>0.5?"❤️":"🌹";
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=Math.random()*28+22+"px";
+  effects.appendChild(el);
+  // Sparkles
+  for(let i=0;i<3+Math.floor(Math.random()*3);i++){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML='✨';
+    s.style.left=(el.offsetLeft+Math.random()*30-15)+'px';
+    s.style.top=(window.innerHeight-30)+'px';
+    s.style.fontSize=(Math.random()*6+4)+'px';
+    effects.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+  }
+  setTimeout(()=>el.remove(),4000);
+}
+
+function createBalloon(){
+  const el=document.createElement("div");
+  el.className="balloon";
+  el.innerHTML="🎈";
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=Math.random()*32+24+"px";
+  effects.appendChild(el);
+  setTimeout(()=>el.remove(),8000);
+}
+
+// Subtle floating watermark hearts behind footer
+function createFooterHeart(){
+  const h = document.createElement("div");
+  h.className="footerHeart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.bottom="0px";
+  effects.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+}
+
+setInterval(createSymbol,150);
+setInterval(createBalloon,500);
+setInterval(createFooterHeart,1000);
 </script>
+
 </body>
 </html>
