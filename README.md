@@ -1,1 +1,70 @@
-# Valentine-app
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Link Generator 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Montserrat',sans-serif;
+  display:flex; justify-content:center; align-items:center;
+  min-height:100vh; background:linear-gradient(135deg,#ff5fa2,#ff2f6d);
+  color:#fff; padding:20px;
+}
+.container{
+  background:rgba(255,255,255,0.1); backdrop-filter:blur(10px);
+  padding:30px; border-radius:25px; width:100%; max-width:450px;
+  text-align:center;
+}
+input, button{
+  width:100%; padding:12px; margin:6px 0; border-radius:20px; border:none; font-size:1rem;
+}
+button{
+  background:linear-gradient(135deg,#ff2f6d,#ff5fa2); color:#fff; cursor:pointer; font-weight:600;
+  box-shadow:0 6px 15px rgba(255,95,158,0.5);
+}
+button:hover{transform:scale(1.05);}
+#generatedLink{
+  margin-top:10px; word-break:break-word; font-size:0.9rem; color:#fff;
+  background:rgba(255,255,255,0.1); padding:10px; border-radius:15px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>💌 Create Your Valentine Link</h2>
+  <form id="linkForm">
+    <input type="text" id="toInput" placeholder="To (Recipient Name)" required>
+    <input type="text" id="fromInput" placeholder="From (Your Name)" required>
+    <input type="text" id="msgInput" placeholder="Custom message (optional)">
+    <input type="url" id="songInput" placeholder="Song URL (optional)">
+    <input type="tel" id="waInput" placeholder="Your WhatsApp number (optional)">
+    <button type="submit">Generate Link 💖</button>
+  </form>
+  <div id="generatedLink"></div>
+</div>
+
+<script>
+const form=document.getElementById('linkForm');
+const output=document.getElementById('generatedLink');
+
+form.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const t=encodeURIComponent(document.getElementById('toInput').value);
+  const f=encodeURIComponent(document.getElementById('fromInput').value);
+  const m=encodeURIComponent(document.getElementById('msgInput').value);
+  const s=encodeURIComponent(document.getElementById('songInput').value);
+  const w=encodeURIComponent(document.getElementById('waInput').value);
+
+  let link = window.location.origin + '/valentine.html' + `?to=${t}&from=${f}`;
+  if(m) link += `&msg=${m}`;
+  if(s) link += `&song=${s}`;
+  if(w) link += `&wa=${w}`;
+
+  output.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+});
+</script>
+</body>
+</html>
